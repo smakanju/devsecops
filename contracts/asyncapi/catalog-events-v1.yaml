@@ -1,0 +1,72 @@
+asyncapi: 2.6.0
+info:
+  title: Catalog Events
+  version: 1.0.0
+channels:
+  catalog.item.created.v1:
+    publish:
+      summary: Catalog item created event
+      message:
+        $ref: '#/components/messages/CatalogItemCreated'
+  catalog.item.updated.v1:
+    publish:
+      summary: Catalog item updated event
+      message:
+        $ref: '#/components/messages/CatalogItemUpdated'
+  catalog.item.deleted.v1:
+    publish:
+      summary: Catalog item deleted event
+      message:
+        $ref: '#/components/messages/CatalogItemDeleted'
+components:
+  messages:
+    CatalogItemCreated:
+      name: CatalogItemCreated
+      payload:
+        $ref: '#/components/schemas/CatalogItemEvent'
+    CatalogItemUpdated:
+      name: CatalogItemUpdated
+      payload:
+        $ref: '#/components/schemas/CatalogItemEvent'
+    CatalogItemDeleted:
+      name: CatalogItemDeleted
+      payload:
+        type: object
+        properties:
+          id:
+            type: integer
+          sku:
+            type: string
+          deletedAt:
+            type: string
+            format: date-time
+        required:
+          - id
+          - sku
+          - deletedAt
+  schemas:
+    CatalogItemEvent:
+      type: object
+      properties:
+        id:
+          type: integer
+        sku:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        currency:
+          type: string
+        occurredAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - sku
+        - name
+        - price
+        - currency
+        - occurredAt

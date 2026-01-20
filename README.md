@@ -1,22 +1,21 @@
 
-# DevSecOps - Kubernetes DevOps & Security
+# DevSecOps E-Commerce Platform (AWS + Java + GitOps)
 
-These are the code files from the [DevSecOps course](https://kodekloud.com/courses/devsecops/) hosted on KodeKloud.
+This repository contains an enterprise-grade e-commerce microservices platform built for AWS with Java 21, Spring Boot 3, EKS, GitOps, and an AI agent control plane.
 
+## Repository Structure
 
-### Fork and Clone this Repo
+- `services/` Spring Boot microservices (catalog is the reference implementation).
+- `agent-platform/` FastAPI + LangGraph AI agent control plane.
+- `platform/terraform/` AWS infrastructure modules and environment stacks.
+- `platform/gitops/` Argo CD app-of-apps and Kustomize overlays.
+- `contracts/` OpenAPI + AsyncAPI contracts.
+- `docs/` Architecture, ADRs, runbooks, SLOs, and threat models.
 
-### Clone to Desktop and VM
+## Quick Start (Catalog Service)
 
-### NodeJS Microservice - Docker Image -
+```bash
+mvn -f services/catalog/pom.xml spring-boot:run
+```
 
-`docker run -p 8787:5000 siddharth67/node-service:v1`
-
-`curl localhost:8787/plusone/99`
- 
-### NodeJS Microservice - Kubernetes Deployment -
-`kubectl create deploy node-app --image siddharth67/node-service:v1`
-
-`kubectl expose deploy node-app --name node-service --port 5000 --type ClusterIP`
-
-`curl node-service-ip:5000/plusone/99`
+OpenAPI UI is available at `http://localhost:8080/swagger-ui/index.html`.
