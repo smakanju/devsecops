@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: catalog
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/example/devsecops
+    targetRevision: main
+    path: services/catalog/deploy/kustomize/overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: catalog
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
